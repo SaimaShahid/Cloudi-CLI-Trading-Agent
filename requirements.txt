@@ -1,0 +1,7 @@
+python-dotenv
+web3==7.16.0
+requests
+fastapi
+uvicorn
+eth-account
+openai==2.45.0

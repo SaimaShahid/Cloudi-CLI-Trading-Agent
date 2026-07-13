@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "{\"result\": {\"XXBTZUSD\": {\"c\": [\"105.00000\"]}}}"
