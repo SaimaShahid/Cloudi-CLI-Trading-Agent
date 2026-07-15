@@ -58,7 +58,7 @@ using the exact API capabilities and tools described in the Markdown below:
 """
 
 # --- CLASS DEFINITION ---
-class CLIMaster:
+class CLOUDIMaster:
     def __init__(self):
         # Base RPC fallback for Web3 interaction
         rpc_url = os.getenv("BASE_RPC_URL", "https://mainnet.base.org")
@@ -111,20 +111,20 @@ class CLIMaster:
         print(f"🛡️ [SURGE ENGINE] Auditing live smart contract {token_address}...")
         return {"score": 85, "status": "SAFE"}
 
-    def monitor_strategy(self, pair, entry_price):
-        """CLI ADAPTIVE LOGIC:
+    def monitor_strategy(self, pair, entry_price, stop_event):
+        """CLOUDI ADAPTIVE LOGIC:
         5% Break-even | 10% Profit (25% or 50% Sell) | Trailing Moon-bag
         """
-        print(f"📝 [CLI INITIALIZATION] Setting up environment for {pair}...")
+        print(f"📝 [CLOUDI INITIALIZATION] Setting up environment for {pair}...")
         self.execute_trade_action("init_account", pair, amount=str(self.paper_balance))
 
         has_moved_to_breakeven = False
         has_recovered_capital = False
         trailing_stop = entry_price * (1 - 0.025) # Initial 2.5% SL
 
-        print(f"🚀 [CLI ACTIVE] Strategy: Adaptive Saima | Domain: {AGENT_DOMAIN} | Target: {EXCHANGE_TARGET}")
+        print(f"🚀 [CLOUDI ACTIVE] Strategy: Adaptive Saima | Domain: {AGENT_DOMAIN} | Target: {EXCHANGE_TARGET}")
 
-        while True:
+        while not stop_event.is_set():
             # Step 2: Fetch Live Price safely without system binary crashes
             try:
                 import ccxt
@@ -180,6 +180,6 @@ class CLIMaster:
 
 # --- EXECUTION TRIGGER ---
 if __name__ == "__main__":
-    agent = CLIMaster()
+    agent = CLOUDIMaster()
     # Triggering strategy loop based on standard target entry
-    agent.monitor_strategy("BTCUSD", 100000.0)
+    agent.monitor_strategy("BTCUSD", 100000.0, None)
